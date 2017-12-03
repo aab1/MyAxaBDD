@@ -21,7 +21,7 @@ namespace MyAxaBDD.GenericHelper
         public void ClickSignOutBtn()
         {
             ScrollToElement(".hero-banner");
-            signOut = GetElementByLinkText("Sign out");
+            signOut = GetElementByCssSelector(".button-group .icon:nth-child(4)");
             signOut.Click();
         }
     }

@@ -14,7 +14,7 @@ namespace MyAxaBDD.SpecflowHooks
         [BeforeScenario]
         public void BeforeScenario()
         {
-           LaunchBrowser("Chrome");
+           LaunchBrowser("Firefox");
             TestController.InitialiseReport();
         }
 

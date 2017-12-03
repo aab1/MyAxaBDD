@@ -22,11 +22,11 @@ namespace MyAxaBDD.MyAxaSteps
             loginPage.AndIamOnLoginPage();
         }
 
-        [Given(@"I enter correct login details")]
-        public void GivenIEnterCorrectLoginDetails()
+        [Given(@"I enter username ""(.*)"" and password ""(.*)""")]
+        public void GivenIEnterUsernameAndPassword(string username, string password)
         {
-            loginPage.EnterEmailID();
-            loginPage.EnterPassword();
+            loginPage.EnterEmailID(username);
+            loginPage.EnterPassword(password);
         }
 
         [When(@"I Click signIn")]

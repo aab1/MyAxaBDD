@@ -21,6 +21,7 @@ namespace MyAxaBDD.SpecflowHooks
             _extent = ExtentManager.Instance;
             _test = _extent.StartTest(TestContext.CurrentContext.Test.Name);
             _test.Log(LogStatus.Info, String.Format("{0} is up and running", TestContext.CurrentContext.Test.Name));
+           // _test.Log();
             _extent
             .AddSystemInfo("Host Name", "Yemi")
             .AddSystemInfo("Environment", "QA")

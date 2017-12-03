@@ -66,16 +66,22 @@ namespace MyAxaBDD.Specifications
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("login and logout")]
         [NUnit.Framework.CategoryAttribute("Regression")]
-        public virtual void LoginAndLogout()
+        [NUnit.Framework.TestCaseAttribute("yemibakare@yahoo.com", "Yemi1978", null)]
+        public virtual void LoginAndLogout(string username, string password, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("login and logout", new string[] {
-                        "Regression"});
+            string[] @__tags = new string[] {
+                    "Regression"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("login and logout", @__tags);
 #line 5
 this.ScenarioSetup(scenarioInfo);
 #line 6
  testRunner.Given("I navigate to myAxa homepage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 7
- testRunner.And("I enter correct login details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I enter username \"{0}\" and password \"{1}\"", username, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 8
  testRunner.When("I Click signIn", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 9

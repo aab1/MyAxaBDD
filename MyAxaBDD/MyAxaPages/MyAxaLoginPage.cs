@@ -21,24 +21,26 @@ namespace MyAxaBDD.MyAxaPages
             manageYourPolicy = GetElementByCssSelector("#main > h1.h1.heading.hidden-min.hidden-xs");
             Assert.True(manageYourPolicy.Displayed, "MyAxa Login page is not displayed!");
         }
-        public void EnterEmailID()
+        public void EnterEmailID(string emailID)
         {
             emailAddress = GetElementById("EmailAddress");
             emailAddress.Clear();
-            emailAddress.SendKeys("yemibakare@yahoo.com");
+            emailAddress.SendKeys(emailID);
         }
-        public void EnterPassword()
+        public void EnterPassword(string passwd)
         {
             password = GetElementById("Password");
             password.Clear();
-            password.SendKeys("Yemi1978");
+            password.SendKeys(passwd);
         }
 
         public MyAxaOverviewPage ClickToSignInToMyAxa()
         {
             signIn = GetElementById("Login-btn");
             signIn.Click();
+            WaitUntilUrlContainsASpecifiedWord("Overview");
             return new MyAxaOverviewPage();
+            
         }
 
        

@@ -1,4 +1,5 @@
 ﻿using MyAxaBDD.SpecflowHooks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -48,8 +49,8 @@ namespace MyAxaBDD
                     driver = InitFirefox();
                     break;
             }
-            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(140));
-            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(2));
+            //driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(140));
+            //driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(2));
             driver.Manage().Window.Maximize();
         }
         private static PhantomJSDriver initPhantomJsDriver()
@@ -110,6 +111,27 @@ namespace MyAxaBDD
                 driver.Quit();
             }
         }
+
+        /*###############################################################
+        Uses - This method helps to type given value into a field
+        It takes in any WebElement of interest and the value to type in
+        #################################################################*/
+        public static void TypeGivenValueInto(IWebElement element, String text)
+        {
+            element.Clear();
+            element.SendKeys(text);
+        }
+
+        /*########################################################################################################
+         * Wait until url contains a specified word
+         */
+         public void WaitUntilUrlContainsASpecifiedWord(string word)
+        {
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            w.IgnoreExceptionTypes(typeof(StaleElementReferenceException),typeof(InvalidElementStateException));
+            w.Until(ExpectedConditions.UrlContains(word));
+        }
+         
         /*
          * ########################################################################################################
          * scroll to an element that is located by css selector
@@ -127,6 +149,15 @@ namespace MyAxaBDD
         //    Actions actions = new Actions(driver);
         //    actions.MoveToElement(ele).Perform();
         //}
+        /*#######################################################################
+	Uses - This method helps to assert/validate that an element is displayed
+	It takes in any IWebElement of interest
+	#########################################################################*/
+        public static void VerifyAnElementIsDisplayed(IWebElement element) 
+        {
+            Assert.True(element.Displayed, element+" is not displayed");
+        }
+
         /*##########################################################################################################
          *  All Combobox(i.e dropdown) helper starts here
         */
@@ -221,6 +252,8 @@ namespace MyAxaBDD
                 try
                 {
                     element = driver.FindElement(locator);
+                    return new WebDriverWait(driver, TimeSpan.FromSeconds(2))
+                       .Until(ExpectedConditions.ElementExists(locator));
                 }
                 catch (Exception e)
                 {
@@ -230,10 +263,12 @@ namespace MyAxaBDD
                           throw e;
                     }
                 }
-                var waitTime = new TimeSpan(0, 0, 2);
-                Thread.Sleep(waitTime);
-
+                //var waitTime = new TimeSpan(0, 0, 0);
+                //Thread.Sleep(waitTime);
                 tryCount++;
+                
+
+                
             }
             Console.WriteLine("{0} is now retrieved", element.ToString());
             return element;
