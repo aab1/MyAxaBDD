@@ -18,8 +18,8 @@ namespace MyAxaBDD.Specifications
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.2.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Create Bug scenario  with scenario outline")]
-    public partial class CreateBugScenarioWithScenarioOutlineFeature
+    [NUnit.Framework.DescriptionAttribute("BugZilla")]
+    public partial class BugZillaFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,7 +31,7 @@ namespace MyAxaBDD.Specifications
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Create Bug scenario  with scenario outline", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "BugZilla", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,10 +74,11 @@ namespace MyAxaBDD.Specifications
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("BugZilla")]
+        [NUnit.Framework.DescriptionAttribute("Login and log a bug")]
         [NUnit.Framework.CategoryAttribute("bugzillaTest")]
         [NUnit.Framework.TestCaseAttribute("A", "File a Bug", "Log in to Bugzilla", "yemi@bugzilla.com", "jesuss", "Enter Bug: TestProduct", "critical", "Macintosh", "Other", "Summary - 1", "Desc - 1", null)]
-        public virtual void BugZilla(string testCase, string flink, string lTitle, string user, string pass, string eTitle, string severity, string harware, string platform, string summary, string desc, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("B", "File a Bug", "Log in to Bugzilla", "yemi@bugzilla.com", "jesuss", "Enter Bug: TestProduct", "major", "Other", "Linux", "Summary - 2", "Desc - 2", null)]
+        public virtual void LoginAndLogABug(string testCase, string flink, string lTitle, string user, string pass, string eTitle, string severity, string harware, string platform, string summary, string desc, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "bugzillaTest"};
@@ -85,7 +86,7 @@ namespace MyAxaBDD.Specifications
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("BugZilla", @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login and log a bug", @__tags);
 #line 8
 this.ScenarioSetup(scenarioInfo);
 #line 3

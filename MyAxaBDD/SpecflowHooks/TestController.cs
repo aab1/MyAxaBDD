@@ -19,9 +19,16 @@ namespace MyAxaBDD.SpecflowHooks
             string projectPath = new Uri(actualPath).LocalPath;
 
             _extent = ExtentManager.Instance;
-            _test = _extent.StartTest(TestContext.CurrentContext.Test.Name);
-            _test.Log(LogStatus.Info, String.Format("{0} is up and running", TestContext.CurrentContext.Test.Name));
-           // _test.Log();
+            // substring of test Name
+            string testname = TestContext.CurrentContext.Test.Name.ToString();
+            int index = testname.IndexOf("(");
+            if (index > 0)
+                testname = testname.Substring(0, index);
+
+            // _test = _extent.StartTest(TestContext.CurrentContext.Test.Name);
+            _test = _extent.StartTest(testname);
+            _test.Log(LogStatus.Info, String.Format("{0} is up and running", testname));
+           
             _extent
             .AddSystemInfo("Host Name", "Yemi")
             .AddSystemInfo("Environment", "QA")
