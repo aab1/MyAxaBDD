@@ -130,7 +130,7 @@ this.FeatureBackground();
 #line 12
    testRunner.And(string.Format("I input phone number\"{0}\" \"{1}\"", areaCode, phoneNumber), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
-   testRunner.And(string.Format("I enter adress with eircode \"{0}\"", eircodeYesNo), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+   testRunner.And(string.Format("I enter adress with eircode \"{0}\"", eircode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
    testRunner.And(string.Format("I selected \"{0}\" \"{1}\" \"{2}\"", household, employmentStatus, occupation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 17

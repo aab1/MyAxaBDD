@@ -11,6 +11,7 @@ namespace MyAxaBDD.GenericHelper
     public class PageBase : BaseClass
     {
         private IWebElement signOut;
+        private IWebElement banner;
         public static MyAxaLoginPage GivenINavigateToLoginPage()
         {
             LaunchUrl("https://secureweb.axa.ie/SelfService/Login/");
@@ -20,7 +21,8 @@ namespace MyAxaBDD.GenericHelper
 
         public void ClickSignOutBtn()
         {
-            ScrollToElement(".hero-banner");
+            banner = GetElementByCssSelector(".hero-banner");
+            ScrollToElement(banner);
             signOut = GetElementByCssSelector(".button-group .icon:nth-child(4)");
             signOut.Click();
         }

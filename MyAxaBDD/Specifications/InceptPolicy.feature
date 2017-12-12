@@ -10,7 +10,7 @@ Scenario Outline: Incept a motor policy with IS pakage type
 		 And date of birth"<dayOfBirth>" "<birthMonth>" "<birthYear>"
 		 And I enter gender "<gender>" and email"<email>"
 		 And I input phone number"<areaCode>" "<phoneNumber>"
-		 And I enter adress with eircode "<eircodeYes/No>"
+		 And I enter adress with eircode "<eircode>"
 		 And I selected "<household>" "<employmentStatus>" "<occupation>"
 
 #Your car section		   

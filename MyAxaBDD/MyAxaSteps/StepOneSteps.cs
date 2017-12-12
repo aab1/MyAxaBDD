@@ -42,27 +42,34 @@ namespace MyAxaBDD.MyAxaSteps
         }
 
         [When(@"I enter gender ""(.*)"" and email""(.*)""")]
-        public void WhenIEnterGenderAndEmail(string p0, string p1)
+        public void WhenIEnterGenderAndEmail(string gender, string email)
         {
-            
+            stepOnePage.ClickGender(gender);
+            stepOnePage.EnterEmail(email);
         }
 
         [When(@"I input phone number""(.*)"" ""(.*)""")]
-        public void WhenIInputPhoneNumber(int p0, int p1)
+        public void WhenIInputPhoneNumber(string areaCode, string phoneNumber)
         {
-            
+            stepOnePage.SelectAreaCode(areaCode);
+            stepOnePage.EnterPhoneNumber(phoneNumber);
         }
 
         [When(@"I enter adress with eircode ""(.*)""")]
-        public void WhenIEnterAdressWithEircode(string p0)
+        public void WhenIEnterAdressWithEircode(string eircode)
         {
-            
+            stepOnePage.EnterEircode(eircode);
+            stepOnePage.ClickConfirmAddress();
+            stepOnePage.AddressCheckBox();
         }
 
         [When(@"I selected ""(.*)"" ""(.*)"" ""(.*)""")]
-        public void WhenISelected(string p0, string p1, string p2)
+        public void WhenISelected(string houseHold, string employmentStatus, string occupation)
         {
-            
+            stepOnePage.SelectHouseHoldType(houseHold);
+            stepOnePage.SelectEmploymentStatus(employmentStatus);
+            stepOnePage.SelectOccupation(occupation);
+            stepOnePage.ClickContinueBtnOnDetailsSection();
         }
 
         [When(@"I complete Your car section ""(.*)"" ""(.*)""")]

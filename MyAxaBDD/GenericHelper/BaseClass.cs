@@ -111,11 +111,16 @@ namespace MyAxaBDD
                 driver.Quit();
             }
         }
-
-        /*###############################################################
+        /*
+         * Add spaces to sentence
+         * ##########################################################################################################
+         */
+       
+        /*#################################################################################################
         Uses - This method helps to type given value into a field
         It takes in any WebElement of interest and the value to type in
-        #################################################################*/
+        ###################################################################################################
+        */
         public static void TypeGivenValueInto(IWebElement element, String text)
         {
             element.Clear();
@@ -131,28 +136,48 @@ namespace MyAxaBDD
             w.IgnoreExceptionTypes(typeof(StaleElementReferenceException),typeof(InvalidElementStateException));
             w.Until(ExpectedConditions.UrlContains(word));
         }
-         
+        /*########################################################################################################
+         * This methods waits 10 second for an element to be clickable
+         * @param input any IWebElement
+         */
+        public void WaitForElementToBeClickable(IWebElement element)
+        {
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            w.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(InvalidElementStateException));
+            w.Until(ExpectedConditions.ElementToBeClickable(element));
+        }
         /*
          * ########################################################################################################
-         * scroll to an element that is located by css selector
+         *  @param input the string value of the css selector from webElement
          */
-        public static void ScrollToElement(string element)
+        public void WaitForElementToBeDisplayed(string element)
+        {
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            w.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(InvalidElementStateException));
+            w.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(element)));
+        }
+        /*
+         * ########################################################################################################
+         * scroll to an element that is located by IWebElement
+         */
+        public static void ScrollToElement(IWebElement element)
         {
             IJavaScriptExecutor executor = (IJavaScriptExecutor) driver;
-            IWebElement elem = GetElementByCssSelector(element);
-            executor.ExecuteScript("window.scrollTo(0," + elem.Location.Y + ")");
+            //IWebElement elem = GetElementByCssSelector(element);
+            executor.ExecuteScript("window.scrollTo(0," + element.Location.Y + ")");
         }
 
-        //public static void ScrollToEle(string element)
-        //{
-        //    var ele = GetElementByCssSelector(element);
-        //    Actions actions = new Actions(driver);
-        //    actions.MoveToElement(ele).Perform();
-        //}
-        /*#######################################################################
-	Uses - This method helps to assert/validate that an element is displayed
-	It takes in any IWebElement of interest
-	#########################################################################*/
+        /*########################################################################################################
+         * This method helps to scroll to the bottom of a page*/
+        public static void ScrollToTheButtomOfAPage() 
+        {
+		 ((IJavaScriptExecutor) driver)
+         .ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
+        }
+        /*########################################################################################################
+	    Uses - This method helps to assert/validate that an element is displayed
+	    It takes in any IWebElement of interest
+	    ##########################################################################################################*/
         public static void VerifyAnElementIsDisplayed(IWebElement element) 
         {
             Assert.True(element.Displayed, element+" is not displayed");
@@ -283,6 +308,8 @@ namespace MyAxaBDD
                 try
                 {
                     element = driver.FindElements(locator);
+                    return new WebDriverWait(driver, TimeSpan.FromSeconds(2))
+                       .Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(locator));
                 }
                 catch (Exception e)
                 {
@@ -292,8 +319,8 @@ namespace MyAxaBDD
                         throw e;
                     }
                 }
-                var waitTime = new TimeSpan(0, 0, 2);
-                Thread.Sleep(waitTime);
+                //var waitTime = new TimeSpan(0, 0, 2);
+                //Thread.Sleep(waitTime);
 
                 tryCount++;
             }

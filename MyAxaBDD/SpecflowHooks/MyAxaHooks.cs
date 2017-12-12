@@ -10,11 +10,16 @@ namespace MyAxaBDD.SpecflowHooks
     public sealed class MyAxaHooks :BaseClass
     {
         // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-       
+        //[BeforeTestRun]
+        //public static void BeforeTest()
+        //{
+        //    LaunchBrowser("Firefox");
+        //    
+        //}
         [BeforeScenario]
         public void BeforeScenario()
         {
-           LaunchBrowser("Firefox");
+           LaunchBrowser("Chrome");
             TestController.InitialiseReport();
         }
 
@@ -44,6 +49,11 @@ namespace MyAxaBDD.SpecflowHooks
             TestController.ExtentTearDown();
         }
 
-        
+        //[AfterTestRun]
+        //public static void AfterTest()
+        //{
+        //    CloseBrowser();
+        //   
+        //}
     }
 }    
