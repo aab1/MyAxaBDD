@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyAxaBDD.RoiMotorPages
@@ -30,6 +31,26 @@ namespace MyAxaBDD.RoiMotorPages
         IWebElement employmentStatus;
         IList<IWebElement> occupation;
         IWebElement continueButton;
+        IWebElement carReg;
+        IWebElement confirmCar;
+        IWebElement isThisTheCorrectCar;
+        IWebElement willThisCarBeUsedForBusinessPurpose;
+        IWebElement willThisCarBeUsedForCommutingToWork;
+        IWebElement milleagePerYear;
+        IWebElement continueBtnOnYourCarSection;
+        IWebElement currentDrivingLicence;
+        IWebElement drivingLicenceAge;
+        IWebElement recentInsurance;
+        IWebElement numOfClaimFreeYears;
+        IWebElement drivingHistorySectionContinueBtn;
+        IWebElement additionaldriverslider;
+        IWebElement additonalDriverContinueBtn;
+        IWebElement haveYouHadAnyClaims;
+        IWebElement claimBtn;
+        IWebElement anotherPolicy;
+        IWebElement PayInFull;
+        IWebElement assumptionCheckBox;
+        IWebElement getQteBtn;
         public void isMotorDSDisplayed()
         {
             yourDetailsSection = GetElementByCssSelector("#personal-details > legend");
@@ -94,7 +115,7 @@ namespace MyAxaBDD.RoiMotorPages
                 //do nothing cos gender field will not be displayed
             }
         }
-        public void EnterEmail(String proposerEmail)
+        public void EnterEmail(string proposerEmail)
         {
             email = GetElementById("YourDetails_EmailAddress");
             TypeGivenValueInto(email, proposerEmail);
@@ -130,7 +151,9 @@ namespace MyAxaBDD.RoiMotorPages
         public void AddressCheckBox()
         {
             WaitForElementToBeDisplayed("[for=\"confirmAddress\"]");
+            WaitForElementToDisAppear("class=\"validation-wrapper\"");
             addressCheckBox = GetElementById("confirmAddress-label");
+            WaitForElementToBeClickable(addressCheckBox);
             addressCheckBox.Click();
         }
         public void SelectHouseHoldType(string houseHold)
@@ -162,6 +185,144 @@ namespace MyAxaBDD.RoiMotorPages
         {
             continueButton = GetElementById("btn-personal");
             continueButton.Click();
+        }
+
+        public void EnterCarReg(string enterCarReg)
+        {
+            WaitForElementToBeDisplayed("#VehicleDetails_RegistrationNumber");
+            carReg = GetElementByCssSelector("#VehicleDetails_RegistrationNumber");
+            TypeGivenValueInto(carReg, enterCarReg);
+        }
+        public void clickConfirmCarButton() 
+        {
+            confirmCar = GetElementById("confirmCarButton");
+            WaitForElementToBeClickable(confirmCar); 
+            confirmCar.Click();
+        }
+
+        public void IsThisTheCorrectCarClickYes()
+        {
+            isThisTheCorrectCar = GetElementByCssSelector("[for=\"IsVehicleRegConfirmedA\"]");
+            WaitForElementToBeClickable(isThisTheCorrectCar);
+            isThisTheCorrectCar.Click();
+        }
+
+        public void WillThisCarBeUsedForBusinessPurpose_ClickNO()
+        {
+            willThisCarBeUsedForBusinessPurpose = GetElementByCssSelector("[for=\"YourCar_BusinessUseB\"]");
+            willThisCarBeUsedForBusinessPurpose.Click();
+        }
+        public void WillThisCarBeUsedForCommutingToWork_ClickNo()
+        {
+            willThisCarBeUsedForCommutingToWork = GetElementByCssSelector("[for=\"YourCar_CommutingUseTypeIdB\"]");
+            willThisCarBeUsedForCommutingToWork.Click();
+        }
+        public void MilleagePerYear(string milleageInKm)
+        {
+            milleagePerYear = GetElementById("YourCar_DrivingUsageId");
+            SelectByVisibleText(milleagePerYear, milleageInKm);
+        }
+        public void ClickContinueBtnOnYourCarSection()
+        {
+            continueBtnOnYourCarSection = GetElementById("btn-vehicle");
+            ScrollToElement(milleagePerYear);
+            continueBtnOnYourCarSection.Click();
+        }
+
+        public void SelectCurrentDrivingLicence(string drivingLicence)
+        {
+            currentDrivingLicence = GetElementById("YourDrivingHistory_DrivingLicenceTypeId");
+            SelectByVisibleText(currentDrivingLicence, drivingLicence);
+        }
+
+        public void SelectDrivingLicenceAge(string enterDrivingLicenceAge)
+        {
+            drivingLicenceAge = GetElementById("YourDrivingHistory_YearsDrivingLicenseHeldId");
+            SelectByVisibleText(drivingLicenceAge, enterDrivingLicenceAge);
+        }
+
+        public void SelectRecentInsurance(string enterRecentInsurance)
+        {
+            recentInsurance = GetElementById("YourDrivingHistory_DrivingExperienceId");
+            SelectByVisibleText(recentInsurance, enterRecentInsurance);
+        }
+
+        public void SelectNumOfClaimFreeYears(string enterNumOfClaimFreeYears)
+        {
+            numOfClaimFreeYears = GetElementById("YourDrivingHistory_NoClaimsDiscountYearsInOwnNameId");
+            SelectByVisibleText(numOfClaimFreeYears, enterNumOfClaimFreeYears);
+        }
+        public void ClickDrivingHistorySectionContinueBtn()
+        {
+            drivingHistorySectionContinueBtn = GetElementById("btn-history");
+            ScrollToElement(numOfClaimFreeYears);
+            drivingHistorySectionContinueBtn.Click();
+        }
+        public void AdditionalDriver_ClickNO()
+        {
+            Thread.Sleep(500);
+            //WaitForElementToBeDisplayed("[for=\"YourAdditionalDrivers_AddingAdditionalDriverB\"]");
+            //WaitForElementExistence("class=\"validation-wrapper");
+           
+            additionaldriverslider = GetElementByCssSelector("[for=\"YourAdditionalDrivers_AddingAdditionalDriverB\"]");
+            WaitForElementToBeClickable(additionaldriverslider);
+            additionaldriverslider.Click();
+        }
+
+        public void AdditonalDriverContinueBtn()
+        {
+            additonalDriverContinueBtn = GetElementById("btn-additional-drivers");
+            WaitForElementToBeClickable(additonalDriverContinueBtn);
+            additonalDriverContinueBtn.Click();
+        }
+
+        public void HaveYouHadAnyClaims_ClickNo()
+        {
+            Thread.Sleep(500);
+            haveYouHadAnyClaims = GetElementByCssSelector("[for=\"YourClaims_AddingClaimB\"]");
+            haveYouHadAnyClaims.Click();
+        }
+
+        public void ClickBtnClaims()
+        {
+            claimBtn = GetElementById("btn-claims");
+            ScrollToElement(haveYouHadAnyClaims);
+            WaitForElementToBeClickable(claimBtn);
+            claimBtn.Click();
+        }
+        public void ClickNoButtonWhenAskedHaveAnotherPolicyInsuredWithAAXA()
+        {
+            WaitForElementToBeDisplayed("[for=\"YourCover_MultiProductB\"]");
+            anotherPolicy = GetElementByCssSelector("[for=\"YourCover_MultiProductB\"]");
+            WaitForElementToBeClickable(anotherPolicy);
+            anotherPolicy.Click();
+        }
+
+        public void PayInFullBtn()
+        {
+            PayInFull = GetElementByCssSelector("[for=\"YourCover_HowDoYouNormallyPayIdA\"]");
+            PayInFull.Click();
+        }
+
+        public void TickAgreeTermsCheckBox()
+        {
+            assumptionCheckBox = GetElementById("agree-terms-label");
+            assumptionCheckBox.Click();
+        }
+
+        public StepTwoPage ClickGetQuoteBtn()
+        {
+            ScrollToTheButtomOfAPage();
+            getQteBtn = GetElementById("btn-getQuote");
+            getQteBtn.Click();
+            return new StepTwoPage();
+        }
+        public StepTwoPage VerifythatStepTwoUrlIsDisplayed()
+        {
+            WaitUntilUrlContainsASpecifiedWord("Step2");
+            string pageTitle = driver.Title;
+            driver.Url.Contains("MotorQuote/Step2");
+            return new StepTwoPage();
         }
     }
 }

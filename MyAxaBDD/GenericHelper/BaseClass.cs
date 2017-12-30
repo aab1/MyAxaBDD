@@ -49,7 +49,7 @@ namespace MyAxaBDD
                     driver = InitFirefox();
                     break;
             }
-            //driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(140));
+            
             //driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(2));
             driver.Manage().Window.Maximize();
         }
@@ -81,8 +81,11 @@ namespace MyAxaBDD
 
         private static IWebDriver InitChrome()
         {
+            //string pathToExtension = @"C:\Users\adeyemi\AppData\Local\Google\Chrome\User Data\Default\Extensions\ocgghcnnjekfpbmafindjmijdpopafoe";
+            //ChromeOptions options = new ChromeOptions();
+            //options.AddArguments("–load - extension =" +pathToExtension);
+            // driver = new ChromeDriver(options);
             driver = new ChromeDriver();
-
             return driver;
         }
 
@@ -95,6 +98,7 @@ namespace MyAxaBDD
         //################################################################################################################
         public static void LaunchUrl(string url)
         {
+            driver.Manage().Timeouts().SetPageLoadTimeout(TimeSpan.FromSeconds(60));
             driver.Navigate().GoToUrl(url);
         }
         //################################################################################################################
@@ -126,13 +130,26 @@ namespace MyAxaBDD
             element.Clear();
             element.SendKeys(text);
         }
+        /*
+         * solve element not clickable
+         */
+         public void ClickUsingActionClass(string cssSelector)
+        {
+            Actions action = new Actions(driver);
+            action.MoveToElement(GetElementByCssSelector(cssSelector)).Click().Build().Perform();
+        }
 
+        public void WaitUntilElementIsNoLongerDisplayed(string cssSelector)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            wait.Until(driver => !GetElementByCssSelector(cssSelector).Displayed);
+        }
         /*########################################################################################################
          * Wait until url contains a specified word
          */
          public void WaitUntilUrlContainsASpecifiedWord(string word)
         {
-            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
             w.IgnoreExceptionTypes(typeof(StaleElementReferenceException),typeof(InvalidElementStateException));
             w.Until(ExpectedConditions.UrlContains(word));
         }
@@ -142,19 +159,38 @@ namespace MyAxaBDD
          */
         public void WaitForElementToBeClickable(IWebElement element)
         {
-            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
             w.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(InvalidElementStateException));
             w.Until(ExpectedConditions.ElementToBeClickable(element));
+        }
+
+        /*
+         * @param this method takes string of css selector
+         * it waits until element causing another element not to be clickable or accessible disappears
+         */
+
+        public void WaitForElementToDisAppear(string element_cssSelecttor)
+        {
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(120));
+            w.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(InvalidElementStateException),typeof(InvalidOperationException));
+            w.Until(ExpectedConditions.InvisibilityOfElementLocated(By.CssSelector(element_cssSelecttor)));
         }
         /*
          * ########################################################################################################
          *  @param input the string value of the css selector from webElement
          */
-        public void WaitForElementToBeDisplayed(string element)
+        public void WaitForElementToBeDisplayed(string element_cssSelecttor)
         {
-            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
             w.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(InvalidElementStateException));
-            w.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(element)));
+            w.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(element_cssSelecttor)));
+        }
+
+        public void WaitForElementExistence(string element_cssSelecttor)
+        {
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            w.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(InvalidElementStateException));
+            w.Until(ExpectedConditions.ElementExists(By.CssSelector(element_cssSelecttor)));
         }
         /*
          * ########################################################################################################
@@ -181,6 +217,12 @@ namespace MyAxaBDD
         public static void VerifyAnElementIsDisplayed(IWebElement element) 
         {
             Assert.True(element.Displayed, element+" is not displayed");
+        }
+
+        public static void VerifyPageTitle(string expectedPageTitle,string actualTitle, string expectedErrorMessage)
+        {
+            //string title = driver.Title;
+            Assert.AreEqual(expectedPageTitle, actualTitle, expectedErrorMessage );
         }
 
         /*##########################################################################################################
