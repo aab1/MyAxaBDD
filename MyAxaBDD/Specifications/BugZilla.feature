@@ -4,7 +4,7 @@ Background: Pre-Condition
 	Given User is at Bugzilla MainPage
 	And File a Bug should be visible
 
-@bugzillaTest
+@Ignore
 Scenario Outline: Login and log a bug
 	When I click on a "<flink>" link to navigate login page
 	Then user should be at login page with title "<lTitle>"

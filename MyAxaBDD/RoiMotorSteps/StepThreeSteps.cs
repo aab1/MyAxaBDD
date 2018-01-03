@@ -24,7 +24,7 @@ namespace MyAxaBDD.MyAxaSteps
         public void WhenICompleteLicenceDetails(string day, string month, string year)
         {
             stepThreePage.DateLicenceWasIssued(day, month, year);
-            stepThreePage.ClickNoToPenaltyPoint();
+            //stepThreePage.ClickNoToPenaltyPoint();
             stepThreePage.ClickNoToLicenceDetailsILD();
             stepThreePage.LicenceDetailSectionContinueBtn();
         }

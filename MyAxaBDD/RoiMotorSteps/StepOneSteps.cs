@@ -90,6 +90,7 @@ namespace MyAxaBDD.MyAxaSteps
         {
             stepOnePage.SelectCurrentDrivingLicence(drivingLicence);
             stepOnePage.SelectDrivingLicenceAge(drivingLicenceAge);
+            stepOnePage.SelectNoToPenaltypoint();
             stepOnePage.SelectRecentInsurance(recentInsurance);
             stepOnePage.SelectNumOfClaimFreeYears(numOfClaimFreeYears);
             stepOnePage.ClickDrivingHistorySectionContinueBtn();

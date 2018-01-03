@@ -18,7 +18,7 @@ namespace MyAxaBDD.MyAxaSteps
         [Given(@"I navigate to myAxa homepage")]
         public void GivenINavigateToMyAxaHomepage()
         {
-            loginPage = PageBase.GivenINavigateToLoginPage();
+            loginPage = MyAxaPageBase.GivenINavigateToLoginPage();
             loginPage.AndIamOnLoginPage();
         }
 

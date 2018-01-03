@@ -75,7 +75,7 @@ namespace MyAxaBDD.Specifications
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Incept a comprehensive motor policy")]
-        [NUnit.Framework.TestCaseAttribute("Mr", "Test", "Ptester", "12", "05 - May", "1970", "Female", "tesst@axa-uat.ie", "087", "0879567812", "Yes", "K32VP28", "Rented Accommodation", "Employed", "Accountant", "10D262", "Up to 5,000 km", "ROI (Full)", "9 years", "Insured in own name", "6+ Years Claims Free Driving", "Pay in full", "29", "More than 3 years", "02", "05 - May", "2010", "AA Insurance", "30/12/2017", "€5,001 to €7,000", "05", "12 - Dec", "2017", "4263971921001307", "02", "22", "123", "Test", null)]
+        [NUnit.Framework.TestCaseAttribute("Mr", "Test", "Ptester", "12", "05 - May", "1973", "Female", "te1sst@axa-uat.ie", "087", "0879560002", "Yes", "K32VP28", "Rented Accommodation", "Employed", "Accountant", "10D262", "Up to 5,000 km", "ROI (Full)", "9 years", "Insured in own name", "6+ Years Claims Free Driving", "Pay in full", "29", "More than 3 years", "02", "05 - May", "2010", "AA Insurance", "30/12/2017", "€5,001 to €7,000", "05", "12 - Dec", "2017", "4263971921001307", "02", "22", "123", "Test", null)]
         public virtual void InceptAComprehensiveMotorPolicy(
                     string title, 
                     string firstName, 
@@ -134,32 +134,128 @@ this.FeatureBackground();
    testRunner.And(string.Format("I enter adress with eircode \"{0}\"", eircode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
    testRunner.And(string.Format("I selected \"{0}\" \"{1}\" \"{2}\"", household, employmentStatus, occupation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
+#line 15
    testRunner.And(string.Format("I complete Your car section \"{0}\" \"{1}\"", carRegNum, kilometersDriven), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
+#line 16
    testRunner.And(string.Format("I complete driving history \"{0}\"\t\"{1}\" \"{2}\" \"{3}\"", drivingLicence, licenceAge, recentInsurance, numOfClaimFreeYears), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 23
-  testRunner.And("I added NO additional driver and claims", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
+#line 17
+   testRunner.And("I added NO additional driver and claims", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
    testRunner.And("I complete Your cover section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
+#line 20
   testRunner.And("Step two is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
+#line 21
   testRunner.And("I click Buy Now Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
+#line 23
   testRunner.And("Step three is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
+#line 24
   testRunner.And(string.Format("I Complete licence details \"{0}\" \"{1}\" \"{2}\"", dayLicenceIssue, monthLicenceIssue, yearLicenceIssue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 35
+#line 25
   testRunner.And(string.Format("I Complete Insurance details section \"{0}\"", existingPolicyExpirationDate), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 36
+#line 26
   testRunner.And(string.Format("I input car value \"{0}\" and date \"{1}\" \"{2}\" \"{3}\" to complete Car details sectio" +
                         "n", carValue, dayCarWasPurchased, monthCarWasPurchased, yearCarWasPurchased), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
+#line 27
   testRunner.And("I proceed to pay in full", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 38
+#line 28
   testRunner.And(string.Format("I enter my credit card details\"{0}\" \"{1}\" \"{2}\" \"{3}\" \"{4}\"", cardNumber, cardExpMonth, cardExpYear, cvv, cardholderName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 29
+  testRunner.Then("Policy is successfully incepted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Incept A TPFT Motor Policy")]
+        [NUnit.Framework.TestCaseAttribute("Mr", "Third", "Party", "12", "05 - May", "1970", "Female", "tesst15@axa-uat.ie", "087", "0879567812", "Yes", "K32VP28", "Rented Accommodation", "Employed", "Accountant", "10D262", "Up to 5,000 km", "ROI (Full)", "9 years", "Insured in own name", "6+ Years Claims Free Driving", "Pay in full", "29", "More than 3 years", "02", "05 - May", "2010", "AA Insurance", "30/12/2017", "€5,001 to €7,000", "05", "12 - Dec", "2017", "4263971921001307", "02", "22", "123", "Test", null)]
+        public virtual void InceptATPFTMotorPolicy(
+                    string title, 
+                    string firstName, 
+                    string lastName, 
+                    string dayOfBirth, 
+                    string birthMonth, 
+                    string birthYear, 
+                    string gender, 
+                    string email, 
+                    string areaCode, 
+                    string phoneNumber, 
+                    string eircodeYesNo, 
+                    string eircode, 
+                    string household, 
+                    string employmentStatus, 
+                    string occupation, 
+                    string carRegNum, 
+                    string kilometersDriven, 
+                    string drivingLicence, 
+                    string licenceAge, 
+                    string recentInsurance, 
+                    string numOfClaimFreeYears, 
+                    string methodOfPayment, 
+                    string startDate, 
+                    string residency, 
+                    string dayLicenceIssue, 
+                    string monthLicenceIssue, 
+                    string yearLicenceIssue, 
+                    string currentInsurer, 
+                    string existingPolicyExpirationDate, 
+                    string carValue, 
+                    string dayCarWasPurchased, 
+                    string monthCarWasPurchased, 
+                    string yearCarWasPurchased, 
+                    string cardNumber, 
+                    string cardExpMonth, 
+                    string cardExpYear, 
+                    string cvv, 
+                    string cardholderName, 
+                    string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Incept A TPFT Motor Policy", exampleTags);
+#line 36
+this.ScenarioSetup(scenarioInfo);
+#line 3
+this.FeatureBackground();
+#line 38
+   testRunner.When(string.Format("I input name \"{0}\" \"{1}\" \"{2}\"", title, firstName, lastName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 39
+   testRunner.And(string.Format("date of birth\"{0}\" \"{1}\" \"{2}\"", dayOfBirth, birthMonth, birthYear), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 40
+   testRunner.And(string.Format("I enter gender \"{0}\" and email\"{1}\"", gender, email), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+   testRunner.And(string.Format("I input phone number\"{0}\" \"{1}\"", areaCode, phoneNumber), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
+   testRunner.And(string.Format("I enter adress with eircode \"{0}\"", eircode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 43
+   testRunner.And(string.Format("I selected \"{0}\" \"{1}\" \"{2}\"", household, employmentStatus, occupation), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 44
+   testRunner.And(string.Format("I complete Your car section \"{0}\" \"{1}\"", carRegNum, kilometersDriven), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 45
+   testRunner.And(string.Format("I complete driving history \"{0}\"\t\"{1}\" \"{2}\" \"{3}\"", drivingLicence, licenceAge, recentInsurance, numOfClaimFreeYears), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 46
+   testRunner.And("I added NO additional driver and claims", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 47
+   testRunner.And("I complete Your cover section", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 49
+  testRunner.And("Step two is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 50
+  testRunner.And("I switch to TPFT", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 51
+  testRunner.And("I add all addons", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 52
+  testRunner.And("I click continue to Buy Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 54
+  testRunner.And("Step three is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 55
+  testRunner.And(string.Format("I Complete licence details \"{0}\" \"{1}\" \"{2}\"", dayLicenceIssue, monthLicenceIssue, yearLicenceIssue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 56
+  testRunner.And(string.Format("I Complete Insurance details section \"{0}\"", existingPolicyExpirationDate), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 57
+  testRunner.And(string.Format("I input car value \"{0}\" and date \"{1}\" \"{2}\" \"{3}\" to complete Car details sectio" +
+                        "n", carValue, dayCarWasPurchased, monthCarWasPurchased, yearCarWasPurchased), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 58
+  testRunner.And("I proceed to pay in full", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 59
+  testRunner.And(string.Format("I enter my credit card details\"{0}\" \"{1}\" \"{2}\" \"{3}\" \"{4}\"", cardNumber, cardExpMonth, cardExpYear, cvv, cardholderName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 60
   testRunner.Then("Policy is successfully incepted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

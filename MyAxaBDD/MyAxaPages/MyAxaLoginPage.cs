@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyAxaBDD.MyAxaPages
 {
-    public class MyAxaLoginPage : PageBase
+    public class MyAxaLoginPage : MyAxaPageBase
     {
         private IWebElement manageYourPolicy;
         private IWebElement emailAddress;

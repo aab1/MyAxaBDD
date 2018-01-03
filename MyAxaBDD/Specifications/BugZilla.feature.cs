@@ -75,13 +75,13 @@ namespace MyAxaBDD.Specifications
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Login and log a bug")]
-        [NUnit.Framework.CategoryAttribute("bugzillaTest")]
+        [NUnit.Framework.IgnoreAttribute("Ignored scenario")]
         [NUnit.Framework.TestCaseAttribute("A", "File a Bug", "Log in to Bugzilla", "yemi@bugzilla.com", "jesuss", "Enter Bug: TestProduct", "critical", "Macintosh", "Other", "Summary - 1", "Desc - 1", null)]
         [NUnit.Framework.TestCaseAttribute("B", "File a Bug", "Log in to Bugzilla", "yemi@bugzilla.com", "jesuss", "Enter Bug: TestProduct", "major", "Other", "Linux", "Summary - 2", "Desc - 2", null)]
         public virtual void LoginAndLogABug(string testCase, string flink, string lTitle, string user, string pass, string eTitle, string severity, string harware, string platform, string summary, string desc, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "bugzillaTest"};
+                    "Ignore"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));

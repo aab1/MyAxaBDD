@@ -51,6 +51,11 @@ namespace MyAxaBDD.RoiMotorPages
         IWebElement PayInFull;
         IWebElement assumptionCheckBox;
         IWebElement getQteBtn;
+        IWebElement penaltyPoint;
+        private static string proposersEmail;
+        private static string bDay;
+        private static string bMth;
+        private static string bYr;
         public void isMotorDSDisplayed()
         {
             yourDetailsSection = GetElementByCssSelector("#personal-details > legend");
@@ -78,19 +83,33 @@ namespace MyAxaBDD.RoiMotorPages
         {
             birthDay = GetElementById("YourDetails_DateOfBirthDay");
             SelectByVisibleText(birthDay, bday);
+            bDay = bday;
         }
         public void SelectBirthMonth(string bMonth)
         {
             birthMonth = GetElementById("YourDetails_DateOfBirthMonth");
             SelectByVisibleText(birthMonth, bMonth);
+            bMth = bMonth;
         }
 
         public void SelectBirthYear(string bYear)
         {
             birthYear = GetElementById("YourDetails_DateOfBirthYear");
             SelectByVisibleText(birthYear, bYear);
+            bYr = bYear;
         }
-
+        public static string GetDayFromBirthDate()
+        {
+            return bDay;
+        }
+        public static string GetMonthFromBirthDate()
+        {
+            return bMth;
+        }
+        public static string GetYearFromBirthDate()
+        {
+            return bYr;
+        }
         public void ClickGender(string selectGender)
         {
             if (choosenTitle.Equals("Dr"))
@@ -119,8 +138,12 @@ namespace MyAxaBDD.RoiMotorPages
         {
             email = GetElementById("YourDetails_EmailAddress");
             TypeGivenValueInto(email, proposerEmail);
+            proposersEmail = proposerEmail;
         }
-
+        public static  string GetEmail()
+        {
+            return proposersEmail;
+        }
         public void SelectAreaCode(string userAreaCode)
         {
             areaCode = GetElementById("YourDetails_PhoneNumberAreaCode");
@@ -234,7 +257,12 @@ namespace MyAxaBDD.RoiMotorPages
             currentDrivingLicence = GetElementById("YourDrivingHistory_DrivingLicenceTypeId");
             SelectByVisibleText(currentDrivingLicence, drivingLicence);
         }
-
+        public void SelectNoToPenaltypoint()
+        {
+            penaltyPoint = GetElementByCssSelector("[for=\"YourDrivingHistory_HasPenaltyPointsB\"]");
+            WaitForElementToBeClickable(penaltyPoint);
+            penaltyPoint.Click();
+        }
         public void SelectDrivingLicenceAge(string enterDrivingLicenceAge)
         {
             drivingLicenceAge = GetElementById("YourDrivingHistory_YearsDrivingLicenseHeldId");
@@ -243,6 +271,7 @@ namespace MyAxaBDD.RoiMotorPages
 
         public void SelectRecentInsurance(string enterRecentInsurance)
         {
+            WaitForElementToBeDisplayed("#YourDrivingHistory_DrivingExperienceId");
             recentInsurance = GetElementById("YourDrivingHistory_DrivingExperienceId");
             SelectByVisibleText(recentInsurance, enterRecentInsurance);
         }

@@ -45,7 +45,7 @@ namespace MyAxaBDD.SpecflowHooks
         [AfterScenario]
         public void AfterScenario()
         {
-           // CloseBrowser();
+            CloseBrowser();
             TestController.ExtentTearDown();
         }
 

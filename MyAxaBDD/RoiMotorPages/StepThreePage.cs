@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyAxaBDD.RoiMotorPages
@@ -49,7 +50,7 @@ namespace MyAxaBDD.RoiMotorPages
 
         public void ClickNoToLicenceDetailsILD()
         {
-            ScrollToElement(penaltyPoint);
+            ScrollToElement(year);
             licenceDetILD1 = GetElementByCssSelector("[for=\"CompleteLicenceDetails_Ild1B\"]");
             licenceDetILD1.Click();
             licenceDetILD2 = GetElementByCssSelector("[for=\"CompleteLicenceDetails_Ild2B\"]");
@@ -118,7 +119,10 @@ namespace MyAxaBDD.RoiMotorPages
 
         public void ConfirmDetailsSectionILDCheckBox()
         {
-            ScrollToTheButtomOfAPage();
+            //Thread.Sleep(1000);
+            WaitForElementExistence("[class=\"wrapper clearfloat\"]");
+            WaitForElementToBeDisplayed("#confirmSuppliedDetails > div.box.no-top-margin > div.content > div > ul > li.no-bullet > p > a:nth-child(2)");
+            ScrollToElement(GetElementByCssSelector("#confirmSuppliedDetails > div.box.no-top-margin > div.content > div > ul > li.no-bullet > p > a:nth-child(2)"));
             WaitForElementToBeDisplayed("#confirmAll-input-wrapper > label");
             confirmDetailsPageCheckBox = GetElementByCssSelector("[for=\"confirmAll\"]");
             WaitForElementToBeClickable(confirmDetailsPageCheckBox);
@@ -126,7 +130,7 @@ namespace MyAxaBDD.RoiMotorPages
         }
 
         public RealexpaymentsPage ClickPayInFullBtn()
-        {
+        {    
             ScrollToTheButtomOfAPage();
             WaitForElementToBeDisplayed("#btnPayInFull");
             payInFull = GetElementById("btnPayInFull");

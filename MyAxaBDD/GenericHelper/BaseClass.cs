@@ -9,6 +9,7 @@ using OpenQA.Selenium.PhantomJS;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -32,7 +33,7 @@ namespace MyAxaBDD
             switch (browser)
             {
                 case "Chrome":
-                    driver = InitChrome();
+                    driver = InitChrome();     
                     break;
                 case "Firefox":
                     driver = InitFirefox();
@@ -116,10 +117,37 @@ namespace MyAxaBDD
             }
         }
         /*
-         * Add spaces to sentence
+         * This method helps to switch between browser window tabs
          * ##########################################################################################################
          */
-       
+        public static void SwitchToWindow(int index)
+        {
+            ReadOnlyCollection<string> windows = driver.WindowHandles;
+
+            if (windows.Count < index)
+            {
+                throw new NoSuchWindowException("Invalid Browser Window index: " + index);
+            }
+
+            driver.SwitchTo().Window(windows[index]);
+            Thread.Sleep(1000);
+        }
+
+        public static void SwitchToParentWindow()
+        {
+            var window_ids = driver.WindowHandles;
+            //count starts from index 1(i.e the first browser window tab) NOT like arrays but the swtich starts from 0
+            for (int i = window_ids.Count; i > 0; i--)
+            {
+                if (i >= 2)
+                {
+                    driver.Close();
+                    driver.SwitchTo().Window(window_ids[i - 2]);
+                }
+
+            }
+            driver.SwitchTo().Window(window_ids[0]);
+        }
         /*#################################################################################################
         Uses - This method helps to type given value into a field
         It takes in any WebElement of interest and the value to type in
@@ -141,7 +169,7 @@ namespace MyAxaBDD
 
         public void WaitUntilElementIsNoLongerDisplayed(string cssSelector)
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
             wait.Until(driver => !GetElementByCssSelector(cssSelector).Displayed);
         }
         /*########################################################################################################
@@ -149,7 +177,7 @@ namespace MyAxaBDD
          */
          public void WaitUntilUrlContainsASpecifiedWord(string word)
         {
-            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
             w.IgnoreExceptionTypes(typeof(StaleElementReferenceException),typeof(InvalidElementStateException));
             w.Until(ExpectedConditions.UrlContains(word));
         }
@@ -159,7 +187,7 @@ namespace MyAxaBDD
          */
         public void WaitForElementToBeClickable(IWebElement element)
         {
-            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
             w.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(InvalidElementStateException));
             w.Until(ExpectedConditions.ElementToBeClickable(element));
         }
@@ -171,7 +199,7 @@ namespace MyAxaBDD
 
         public void WaitForElementToDisAppear(string element_cssSelecttor)
         {
-            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(120));
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
             w.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(InvalidElementStateException),typeof(InvalidOperationException));
             w.Until(ExpectedConditions.InvisibilityOfElementLocated(By.CssSelector(element_cssSelecttor)));
         }
@@ -181,14 +209,20 @@ namespace MyAxaBDD
          */
         public void WaitForElementToBeDisplayed(string element_cssSelecttor)
         {
-            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
             w.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(InvalidElementStateException));
             w.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(element_cssSelecttor)));
+        }
+        public void WaitForElementIsNoLongerAttachedToTheDOM(IWebElement element)
+        {
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
+            w.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(InvalidElementStateException));
+            w.Until(ExpectedConditions.StalenessOf(element));
         }
 
         public void WaitForElementExistence(string element_cssSelecttor)
         {
-            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            WebDriverWait w = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
             w.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(InvalidElementStateException));
             w.Until(ExpectedConditions.ElementExists(By.CssSelector(element_cssSelecttor)));
         }
@@ -218,7 +252,10 @@ namespace MyAxaBDD
         {
             Assert.True(element.Displayed, element+" is not displayed");
         }
-
+        //public static void VerifyThatTextContainsAWord(string expectedWord, string sentence)
+        //{
+        //    .Contains(expectedWord, sentence);
+        //}
         public static void VerifyPageTitle(string expectedPageTitle,string actualTitle, string expectedErrorMessage)
         {
             //string title = driver.Title;

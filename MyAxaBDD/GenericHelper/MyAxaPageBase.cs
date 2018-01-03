@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyAxaBDD.GenericHelper
 {
-    public class PageBase : BaseClass
+    public class MyAxaPageBase : BaseClass
     {
         private IWebElement signOut;
         private IWebElement banner;

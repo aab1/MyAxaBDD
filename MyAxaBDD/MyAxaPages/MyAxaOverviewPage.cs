@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace MyAxaBDD.MyAxaPages
 {
-    public class MyAxaOverviewPage : PageBase
+    public class MyAxaOverviewPage : MyAxaPageBase
     {
-        private IWebElement userlogo;
+        private IWebElement welcomeMsg;
         
         public void OverviewPageIsDisplayed()
         {
-            userlogo = GetElementById("user-menu");
-            Assert.True(userlogo.Displayed, "Overview Page is not displayed!");
+            WaitForElementToBeDisplayed("#welcome-message");
+            welcomeMsg = GetElementById("welcome-message");
+            Assert.True(welcomeMsg.Displayed, "Overview Page is not displayed!");
         }
 
        
